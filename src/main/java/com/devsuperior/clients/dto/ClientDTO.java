@@ -2,6 +2,9 @@ package com.devsuperior.clients.dto;
 
 
 import com.devsuperior.clients.entities.Client;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 import org.modelmapper.ModelMapper;
 
 import java.time.LocalDate;
@@ -9,18 +12,17 @@ import java.time.LocalDate;
 public class ClientDTO {
 
     private Long id;
+    @Size(min = 3, max = 80, message = "O nome precisa ter de 3 a 80 caracteres")
+    @NotBlank(message = "Nome: não pode ser vazio")
     private String name;
 
     private String cpf;
     private Double income;
+    @PastOrPresent(message = "A data de nascimento não pode ser uma data futura")
     private LocalDate birthDate;
     private Integer children;
 
 
-
-    public ClientDTO(){
-
-    }
 
     public ClientDTO(Long id, String name, String cpf, Double income, LocalDate birthDate, Integer children) {
         this.id = id;
